@@ -1,0 +1,1 @@
+export const ap:string="https://localhost:7055/api"
