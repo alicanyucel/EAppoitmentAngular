@@ -6,7 +6,7 @@
                 <p>Please fiil your information to sign in</p>
             </div>
             <div class="card-body">
-                <form formValidate #loginForm="ngForm" autocomplete="off">
+                <form formValidate #loginForm="ngForm" autocomplete="off" (ngSubmit)="signIn(loginForm)">
                     <div class="form-group">
                         <label>UserName or Email</label>
                         <input type="text" class="form-control" [(ngModel)]="login.userNmaeOrEmail" name="userNmaeOrEmail" required  minlength="3">
