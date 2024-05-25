@@ -31,7 +31,7 @@
             <tbody>
                 @for(doctor of doctors;track doctor){
                     <tr>
-                       <td>{{$index}}</td>
+                       <td>{{$index+1}}</td>
                       <td>{{doctor.fullName}}</td>
                       <td>{{doctor.department.name}}</td>
                       <td>
