@@ -1,3 +1,25 @@
 a{
     cursor: pointer;
 }
+.search{
+top:6px;
+position:absolute;
+left:25px;
+}
+input[type="search"]{
+padding-left:35px;
+}
+.search-container {
+    position: relative;
+}
+.search-container input[type="search"] {
+    width: 100%;
+    padding-left: 2.5rem; /* Adjust this value to make room for the icon */
+}
+.search-container .fa-magnifying-glass {
+    position: absolute;
+    left:1.5rem; /* Adjust this value to position the icon correctly */
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
