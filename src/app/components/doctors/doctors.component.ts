@@ -7,10 +7,11 @@ import { CommonModule } from '@angular/common';
 import { departments } from '../../Constans/constans';
 import { FormValidateDirective } from 'form-validate-angular';
 import { FormsModule, NgForm } from '@angular/forms';
+import { DoctorPipe } from '../../pipe/doctor.pipe';
 @Component({
   selector: 'app-doctors',
   standalone: true,
-  imports: [RouterLink,CommonModule,FormValidateDirective,FormsModule],
+  imports: [RouterLink,CommonModule,FormValidateDirective,FormsModule,DoctorPipe],
   templateUrl: './doctors.component.html',
   styleUrl: './doctors.component.css'
 })
@@ -19,7 +20,7 @@ export class DoctorsComponent  implements OnInit{
 doctors:DoctorModel[]=[];
 departments=departments;
 createModel:DoctorModel=new DoctorModel();
-search: any;
+search:string="";
 constructor(private http:GenericService) {}
   ngOnInit(): void {
     this.getAll();

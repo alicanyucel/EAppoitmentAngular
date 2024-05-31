@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for(doctor of doctors ; track doctor){
+                @for(doctor of doctors | doctor:search ; track doctor){
                     <tr>
                         <td>{{$index + 1}}</td>
                         <td>{{doctor.fullName}}</td>
