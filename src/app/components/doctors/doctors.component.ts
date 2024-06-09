@@ -51,3 +51,4 @@ delete(id: string, fullName: string){
   })
 }
 }
+// sorun çözüldü
