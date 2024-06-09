@@ -42,4 +42,12 @@ getAll(){
   this.doctors=res.data;
   });
 }
+delete(id: string, fullName: string){
+  this.swall.calSwal("Delete doctor?",`You want to delete ${fullName}?`,()=> {
+    this.http.post<string>("Doctors/DeleteById", {id: id}, (res)=> {
+      this.swall.callToast(res.data,"info");
+      this.getAll();
+    })
+  })
+}
 }
