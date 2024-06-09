@@ -8,6 +8,7 @@ import { departments } from '../../Constans/constans';
 import { FormValidateDirective } from 'form-validate-angular';
 import { FormsModule, NgForm } from '@angular/forms';
 import { DoctorPipe } from '../../pipe/doctor.pipe';
+import { SwalService } from '../../Services/swal.service';
 @Component({
   selector: 'app-doctors',
   standalone: true,
@@ -21,10 +22,11 @@ doctors:DoctorModel[]=[];
 departments=departments;
 createModel:DoctorModel=new DoctorModel();
 search:string="";
-constructor(private http:GenericService) {}
+constructor(private http:GenericService,private swall:SwalService) {}
   ngOnInit(): void {
     this.getAll();
-  }
+    this.swall.callToast("Deneme","success");
+    }
   add(form:NgForm){
     if(form.valid){
       this.http.post<string>("Doctors/Create",this.createModel,(res)=>{
