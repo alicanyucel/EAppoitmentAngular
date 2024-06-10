@@ -4,6 +4,7 @@ export class DoctorModel{
     id:string="";
     firstName:string="";
     lastName:string="";
-    department:any="";
     fullName:string="";
+    department:DepartmentModel=new DepartmentModel();
+    departmentValue:number=0;
 }

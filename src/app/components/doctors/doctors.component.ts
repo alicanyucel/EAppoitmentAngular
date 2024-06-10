@@ -18,9 +18,11 @@ import { SwalService } from '../../Services/swal.service';
 })
 export class DoctorsComponent  implements OnInit{
 @ViewChild("addModelCloseBtn") addModalCloseBtn:ElementRef<HTMLButtonElement>| undefined;
+@ViewChild("updateModelCloseBtn") updateModalCloseBtn:ElementRef<HTMLButtonElement>| undefined;
 doctors:DoctorModel[]=[];
 departments=departments;
 createModel:DoctorModel=new DoctorModel();
+updateModel:DoctorModel=new DoctorModel();
 search:string="";
 constructor(private http:GenericService,private swall:SwalService) {}
   ngOnInit(): void {
@@ -49,6 +51,20 @@ delete(id: string, fullName: string){
       this.getAll();
     })
   })
+}
+get(data:DoctorModel){
+  this.updateModel={...data};
+  this.updateModel.departmentValue=data.department.value;
+
+}
+update(form:NgForm){
+  if(form.valid){
+    this.http.post<string>("Doctors/Update",this.updateModel,(res)=>{
+    this.swall.callToast(res.data,"success");
+    this.getAll();
+    this.updateModalCloseBtn?.nativeElement.click();
+    });
+  }
 }
 }
 // sorun çözüldü
