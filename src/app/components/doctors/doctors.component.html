@@ -61,19 +61,19 @@
         <form #addForm="ngForm" formValidate autocomplete="off" (ngSubmit)="add(addForm)">
             <div class="modal-body">
                 <div class="form-group">
-                    <label>First Name</label>
+                    <label>İsim</label>
                     <input type="text" [(ngModel)]="createModel.firstName" name="firstName" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Last Name</label>
+                    <label>Soy İsim</label>
                     <input type="text" [(ngModel)]="createModel.lastName" name="lastName" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Department</label>
+                    <label>Branş</label>
                     <select class="form-control" name="department" [(ngModel)]="createModel.departmentValue" required>
                         <option [value]=0>Seçiniz</option>
                         @for(department of departments; track department){
