@@ -102,7 +102,7 @@
 
                 <div class="form-group mt-2">
                     <label>Full Address</label>
-                    <textarea class="form-control" [(ngModel)]="createModel.fulAdress" name="FullAddress"  minlength="3"></textarea>
+                    <textarea class="form-control" [(ngModel)]="createModel.fulAdress" name="FullAddress" required minlength="3"></textarea>
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
@@ -156,7 +156,7 @@
 
                 <div class="form-group mt-2">
                     <label>Full Address</label>
-                    <textarea class="form-control" [(ngModel)]="updateModel.fulAdress" name="updateFullAddress"  minlength="3"></textarea>
+                    <textarea class="form-control" [(ngModel)]="updateModel.fulAdress" name="updateFullAddress" required  minlength="3"></textarea>
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
