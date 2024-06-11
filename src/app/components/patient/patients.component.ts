@@ -1,64 +1,76 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { PatientModel } from '../../Models/patient.model';
-import { GenericService } from '../../Services/generic.service';
-import { SwalService } from '../../Services/swal.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormValidateDirective } from 'form-validate-angular';
 import { PatientPipe } from '../../pipe/patient.pipe';
 import { RouterLink } from '@angular/router';
+import { GenericService } from '../../Services/generic.service';
+import { PatientModel } from '../../Models/patient.model';
+import { SwalService } from '../../Services/swal.service';
 
 @Component({
   selector: 'app-patient',
   standalone: true,
-  imports: [CommonModule, FormsModule, FormValidateDirective, PatientPipe, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, FormValidateDirective, PatientPipe],
   templateUrl: './patients.component.html',
   styleUrl: './patients.component.css'
 })
 export class PatientsComponent implements OnInit {
-  @ViewChild("addModelCloseBtn") addModalCloseBtn: ElementRef<HTMLButtonElement> | undefined;
-  @ViewChild("updateModelCloseBtn") updateModalCloseBtn: ElementRef<HTMLButtonElement> | undefined;
-  patients: PatientModel[] = [];
+  patients: PatientModel[] = [];  
+
+  @ViewChild("addModalCloseBtn") addModalCloseBtn: ElementRef<HTMLButtonElement> | undefined;
+  @ViewChild("updateModalCloseBtn") updateModalCloseBtn: ElementRef<HTMLButtonElement> | undefined;
+
   createModel: PatientModel = new PatientModel();
   updateModel: PatientModel = new PatientModel();
+
   search: string = "";
-  constructor(private http: GenericService, private swall: SwalService) { }
+
+  constructor(
+    private http: GenericService,
+    private swal: SwalService
+  ){}
+
   ngOnInit(): void {
     this.getAll();
-    this.swall.callToast("Deneme", "success");
   }
+
+  getAll(){
+    this.http.post<PatientModel[]>("Patients/GetAll", {}, (res)=> {
+      this.patients = res.data;
+    });
+  }
+  
   add(form: NgForm){
     if(form.valid){
       this.http.post<string>("Patients/Create",this.createModel,(res)=> {
-        this.swall.callToast(res.data,"success");
+        this.swal.callToast(res.data,"success");
         this.getAll();
         this.addModalCloseBtn?.nativeElement.click();
         this.createModel = new PatientModel();
       });
     }
   }
-  getAll() {
-    this.http.post<PatientModel[]>("Patients/GetAll", {}, (res) => {
-      this.patients = res.data;
-    });
-  }
-  delete(id: string, fullName: string) {
-    this.swall.calSwal("Delete patients?", `You want to delete ${fullName}?`, () => {
-      this.http.post<string>("Patients/DeleteById", { id: id }, (res) => {
-        this.swall.callToast(res.data, "info");
+
+  delete(id: string, fullName: string){
+    this.swal.calSwal("Delete patient?",`You want to delete ${fullName}?`,()=> {
+      this.http.post<string>("Patients/DeleteById", {id: id}, (res)=> {
+        this.swal.callToast(res.data,"info");
         this.getAll();
       })
     })
   }
-  get(data: PatientModel) {
-    this.updateModel = { ...data };
+
+  get(data: PatientModel){    
+    this.updateModel = {...data};    
   }
-  update(form: NgForm) {
-    if (form.valid) {
-      this.http.post<string>("Patients/Update", this.updateModel, (res) => {
-        this.swall.callToast(res.data, "success");
+
+  update(form:NgForm){
+    if(form.valid){
+      this.http.post<string>("Patients/Update",this.updateModel,(res)=> {
+        this.swal.callToast(res.data,"success");
         this.getAll();
-        this.updateModalCloseBtn?.nativeElement.click();
+        this.updateModalCloseBtn?.nativeElement.click();        
       });
     }
   }
