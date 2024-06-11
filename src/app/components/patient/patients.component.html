@@ -1,5 +1,11 @@
 <div class="mt-3 d-flex justify-content-between align-items-center">
-    <h3>Hasta Sayfası</h3>
+    <h3>Patients Page</h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item active">Patients</li>
+        </ol>
+    </nav>
 </div>
 
 <div class="mt-3">
@@ -8,12 +14,12 @@
             <div class="col-xl-9 col-lg-8 col-md-6 col-sm-12 col-12">
                 <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addModal">
                     <i class="fa-solid fa-plus me-1"></i>
-                    <span>Hasta Ekle</span>
+                    <span>Add Patient</span>
                 </button>
             </div>
 
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 position-relative">
-                <input type="search" class="form-control" [(ngModel)]="search" placeholder="Hasta Arayın.">
+                <input type="search" class="form-control" [(ngModel)]="search" placeholder="Search patient...">
                 <i class="fa-solid fa-magnifying-glass search"></i>
             </div>
         </div>
@@ -24,18 +30,20 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>İsim Soy isim</th>
-                    <th>İl/İlçe</th>
-                    <th>Tam Adres</th>
-                    <th>İşlemler</th>
+                    <th>Full Name</th>
+                    <th>Identity Number</th>
+                    <th>City / Town</th>
+                    <th>Full Address</th>
+                    <th>Operations</th>
                 </tr>
             </thead>
             <tbody>
-                @for(patient of patients | patient:search ; track patient){
+                @for(patient of patients | patient : search; track patient){
                     <tr>
                         <td>{{$index + 1}}</td>
                         <td>{{patient.fullName}}</td>
-                        <td>{{patient.city}}/{{patient.town}}</td>
+                        <td>{{patient.identityNumber}}</td>
+                        <td>{{patient.city}} / {{patient.town}}</td>
                         <td>{{patient.fullAdress}}</td>
                         <td>
                             <button (click)="get(patient)" data-bs-toggle="modal" data-bs-target="#updateModal" class="btn btn-sm btn-outline-primary me-1" title="Update">
@@ -73,30 +81,40 @@
                     <input type="text" [(ngModel)]="createModel.lastName" name="lastName" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
+
                 <div class="form-group mt-2">
-                    <label>İl</label>
+                    <label>TC Kimlik No</label>
+                    <input type="text" [(ngModel)]="createModel.identityNumber" name="identityNumber" class="form-control" required minlength="11" maxlength="11">
+                    <div class="invalid-feedback"></div>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label>Şehir</label>
                     <input type="text" [(ngModel)]="createModel.city" name="city" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
+
                 <div class="form-group mt-2">
                     <label>İlçe</label>
                     <input type="text" [(ngModel)]="createModel.town" name="town" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
+
                 <div class="form-group mt-2">
                     <label>Tam Adres</label>
-                 <textarea class="form-control" [(ngModel)]="createModel.fullAdress" name="fullAdress" required minlength="3" ></textarea>
+                    <textarea class="form-control" [(ngModel)]="createModel.fullAdress" name="fullAddress" required minlength="3"></textarea>
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-dark w-100">Kaydet</button>
+                <button type="submit" class="btn btn-dark w-100">Save</button>
             </div>
         </form>
       </div>
     </div>
 </div>
-<!--update modal-->
+
+<!-- Update Modal -->
 <div class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -104,11 +122,11 @@
           <h1 class="modal-title fs-5">Hasta Güncelleme Formu</h1>
           <button type="button" #updateModalCloseBtn class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form #addForm="ngForm" formValidate autocomplete="off" (ngSubmit)="update(addForm)">
+        <form #updateForm="ngForm" formValidate autocomplete="off" (ngSubmit)="update(updateForm)">
             <div class="modal-body">
                 <div class="form-group">
                     <label>İsim</label>
-                    <input type="text" [(ngModel)]="updateModel.firstName" name="updatefirstName" class="form-control" required minlength="3">
+                    <input type="text" [(ngModel)]="updateModel.firstName" name="updateFirstName" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
@@ -117,24 +135,33 @@
                     <input type="text" [(ngModel)]="updateModel.lastName" name="updatelastName" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
+
                 <div class="form-group mt-2">
-                    <label>İl</label>
-                    <input type="text" [(ngModel)]="updateModel.city" name="updatecity" class="form-control" required minlength="3">
+                    <label>Tc Kimlik No</label>
+                    <input type="text" [(ngModel)]="updateModel.identityNumber" name="updateIdentityNumber" class="form-control" required minlength="11" maxlength="11">
                     <div class="invalid-feedback"></div>
                 </div>
+
+                <div class="form-group mt-2">
+                    <label>Şehir</label>
+                    <input type="text" [(ngModel)]="updateModel.city" name="updateCity" class="form-control" required minlength="3">
+                    <div class="invalid-feedback"></div>
+                </div>
+
                 <div class="form-group mt-2">
                     <label>İlçe</label>
-                    <input type="text" [(ngModel)]="updateModel.town" name="updatetown" class="form-control" required minlength="3">
+                    <input type="text" [(ngModel)]="updateModel.town" name="updateTown" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
+
                 <div class="form-group mt-2">
                     <label>Tam Adres</label>
-                 <textarea class="form-control" [(ngModel)]="updateModel.fullAdress" name="updatefullAdress" required minlength="3" ></textarea>
+                    <textarea class="form-control" [(ngModel)]="updateModel.fullAdress" name="updateFullAddress" required minlength="3"></textarea>
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-dark w-100">Güncelle</button>
+                <button type="submit" class="btn btn-primary w-100">Güncelle</button>
             </div>
         </form>
       </div>

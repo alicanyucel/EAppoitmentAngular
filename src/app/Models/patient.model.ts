@@ -7,4 +7,5 @@ export class PatientModel{
     town:string="";
     fullAdress:string="";
     identityNumber:string="";
+IdentityNumber: any;
 }
