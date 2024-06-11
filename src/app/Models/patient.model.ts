@@ -8,6 +8,4 @@ export class PatientModel{
     town: string = "";
     fullAddress:string = "";
     identityNumber:string = "";
-fullAdress: any;
-fulAdress: any;
 }
