@@ -33,7 +33,6 @@
                     <th>Full Name</th>
                     <th>Identity Number</th>
                     <th>City / Town</th>
-                    <th>Full Address</th>
                     <th>Operations</th>
                 </tr>
             </thead>
@@ -44,7 +43,7 @@
                         <td>{{patient.fullName}}</td>
                         <td>{{patient.identityNumber}}</td>
                         <td>{{patient.city}} / {{patient.town}}</td>
-                        <td>{{patient. fullAddress}}</td>
+                    
                         <td>
                             <button (click)="get(patient)" data-bs-toggle="modal" data-bs-target="#updateModal" class="btn btn-sm btn-outline-primary me-1" title="Update">
                                 <i class="fa-solid fa-edit"></i>
@@ -99,12 +98,7 @@
                     <input type="text" [(ngModel)]="createModel.town" name="town" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
-
-                <div class="form-group mt-2">
-                    <label>Full Address</label>
-                    <input type="text" class="form-control" [(ngModel)]="createModel.fullAddress" name="FullAddress">
-                    <div class="invalid-feedback"></div>
-                </div>
+                
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-dark w-100">Save</button>
@@ -154,10 +148,7 @@
                     <div class="invalid-feedback"></div>
                 </div>
 
-                <div class="form-group mt-2">
-                    <label>Full Address</label>
-                    <input type="text" class="form-control" [(ngModel)]="updateModel. fullAddress" name="updateFullAddress">
-                </div>
+                
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary w-100">Update</button>

@@ -4,8 +4,9 @@ export class PatientModel{
     firstName: string = "";
     lastName: string = "";
     fullName: string = "";
+    Address:string = "";
     city: string = "";
     town: string = "";
-    fullAddress:string = "";
+   
     identityNumber:string = "";
 }
