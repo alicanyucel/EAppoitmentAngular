@@ -14,7 +14,6 @@ export class SwalService {
 Swal.fire({
   title:title,
   timer:3000,
-  text:'Basarılı',
   icon:icon,
   toast:true,
  showConfirmButton:false,

@@ -64,44 +64,44 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5">Add Patient Form</h1>
+          <h1 class="modal-title fs-5">Hasta Ekleme Formu</h1>
           <button type="button" #addModalCloseBtn class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form #addForm="ngForm" formValidate autocomplete="off" (ngSubmit)="add(addForm)">
             <div class="modal-body">
                 <div class="form-group">
-                    <label>First Name</label>
+                    <label>İsim</label>
                     <input type="text" [(ngModel)]="createModel.firstName" name="firstName" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Last Name</label>
+                    <label>Soy İsim</label>
                     <input type="text" [(ngModel)]="createModel.lastName" name="lastName" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Identity Number</label>
+                    <label>Tc Kimlik No</label>
                     <input type="text" [(ngModel)]="createModel.identityNumber" name="identityNumber" class="form-control" required minlength="11" maxlength="11">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>City</label>
+                    <label>Şehir</label>
                     <input type="text" [(ngModel)]="createModel.city" name="city" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Town</label>
+                    <label>İlçe</label>
                     <input type="text" [(ngModel)]="createModel.town" name="town" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
                 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-dark w-100">Save</button>
+                <button type="submit" class="btn btn-dark w-100">Kaydet</button>
             </div>
         </form>
       </div>
@@ -113,45 +113,44 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5">Update Patient Form</h1>
+          <h1 class="modal-title fs-5">Hasta Güncelleme Sayfası</h1>
           <button type="button" #updateModalCloseBtn class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form #updateForm="ngForm" formValidate autocomplete="off" (ngSubmit)="update(updateForm)">
             <div class="modal-body">
                 <div class="form-group">
-                    <label>First Name</label>
+                    <label>İsim</label>
                     <input type="text" [(ngModel)]="updateModel.firstName" name="updateFirstName" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Last Name</label>
+                    <label>Soy İsim</label>
                     <input type="text" [(ngModel)]="updateModel.lastName" name="updatelastName" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Identity Number</label>
+                    <label>Tc </label>
                     <input type="text" [(ngModel)]="updateModel.identityNumber" name="updateIdentityNumber" class="form-control" required minlength="11" maxlength="11">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>City</label>
+                    <label>Şehir</label>
                     <input type="text" [(ngModel)]="updateModel.city" name="updateCity" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Town</label>
+                    <label>İlçe</label>
                     <input type="text" [(ngModel)]="updateModel.town" name="updateTown" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
-                
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary w-100">Update</button>
+                <button type="submit" class="btn btn-primary w-100">Güncelle</button>
             </div>
         </form>
       </div>
