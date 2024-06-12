@@ -1,5 +1,5 @@
 <div class="mt-3 d-flex justify-content-between align-items-center">
-    <h3>Kullanıcılar</h3>
+    <h3>Kullanıcı Sayfası</h3>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a routerLink="/">Ana Sayfa</a></li>
@@ -31,9 +31,9 @@
                 <tr>
                     <th>#</th>
                     <th>Tam Ad</th>
-                    <th>Kimlik No</th>
-                    <th>İlçe</th>
-                    <th>Tam Adres</th>
+                    <th>Kullanıcı Adı</th>
+                    <th>Mail</th>
+                    <th>Roller</th>
                     <th>İşlemler</th>
                 </tr>
             </thead>
@@ -42,14 +42,20 @@
                     <tr>
                         <td>{{$index + 1}}</td>
                         <td>{{user.fullName}}</td>
-                        <td>{{user.identityNumber}}</td>
-                        <td>{{user.city}} / {{user.town}}</td>
-                        <td>{{user.fullAdress}}</td>
+                        <td>{{user.userName}}</td>
+                        <td>{{user.email}}</td>
                         <td>
-                            <button (click)="get(user)" data-bs-toggle="modal" data-bs-target="#updateModal" class="btn btn-sm btn-outline-primary me-1" title="Güncelle">
+                            <ul>
+                                @for(r of user.roleNames; track r){
+                                    <li>{{r}}</li>
+                                }
+                            </ul>
+                        </td>
+                        <td>
+                            <button (click)="get(user)" data-bs-toggle="modal" data-bs-target="#updateModal" class="btn btn-sm btn-outline-primary me-1" title="Update">
                                 <i class="fa-solid fa-edit"></i>
                             </button>
-                            <button (click)="delete(user.id,user.fullName)" class="btn btn-sm btn-outline-danger" title="Sil">
+                            <button (click)="delete(user.id,user.fullName)" class="btn btn-sm btn-outline-danger" title="Delete">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
@@ -77,32 +83,38 @@
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Soy İsim</label>
+                    <label>Soyad</label>
                     <input type="text" [(ngModel)]="createModel.lastName" name="lastName" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Kimlik No</label>
-                    <input type="text" [(ngModel)]="createModel.identityNumber" name="identityNumber" class="form-control" required minlength="11" maxlength="11">
+                    <label>Kullanıcı Adı</label>
+                    <input type="text" [(ngModel)]="createModel.userName" name="userName" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Şehir</label>
-                    <input type="text" [(ngModel)]="createModel.city" name="city" class="form-control" required minlength="3">
+                    <label>Mail</label>
+                    <input type="email" [(ngModel)]="createModel.email" name="email" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>İlçe</label>
-                    <input type="text" [(ngModel)]="createModel.town" name="town" class="form-control" required minlength="3">
+                    <label>Şifre</label>
+                    <input type="password" [(ngModel)]="createModel.password" name="password" class="form-control" required>
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Tam Adres</label>
-                    <textarea class="form-control" [(ngModel)]="createModel.fullAdress" name="FullAddress"></textarea>
+                    <label>Roller</label>
+                    <select class="form-control" multiple required [(ngModel)]="createModel.roleIds" name="roleIds">
+                        @for(role of roles; track role){
+                            <option [value]="role.id">
+                                {{role.name}}
+                            </option>
+                        }                        
+                    </select>
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
@@ -120,7 +132,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5">Kullanıcı Güncelleme Formu</h1>
-          <button type="button" #updateModalCloseBtn class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" #updateModalCloseBtn class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
         </div>
         <form #updateForm="ngForm" formValidate autocomplete="off" (ngSubmit)="update(updateForm)">
             <div class="modal-body">
@@ -131,32 +143,32 @@
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Soy İsim</label>
-                    <input type="text" [(ngModel)]="updateModel.lastName" name="updatelastName" class="form-control" required minlength="3">
+                    <label>Soyad</label>
+                    <input type="text" [(ngModel)]="updateModel.lastName" name="updateLastName" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Kimlik No</label>
-                    <input type="text" [(ngModel)]="updateModel.identityNumber" name="updateIdentityNumber" class="form-control" required minlength="11" maxlength="11">
+                    <label>Kullanıcı Adı</label>
+                    <input type="text" [(ngModel)]="updateModel.userName" name="updateUserName" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label>Şehir</label>
-                    <input type="text" [(ngModel)]="updateModel.city" name="updateCity" class="form-control" required minlength="3">
+                    <label>Mail</label>
+                    <input type="email" [(ngModel)]="updateModel.email" name="updateEmail" class="form-control" required minlength="3">
                     <div class="invalid-feedback"></div>
-                </div>
+                </div>               
 
                 <div class="form-group mt-2">
-                    <label>İlçe</label>
-                    <input type="text" [(ngModel)]="updateModel.town" name="updateTown" class="form-control" required minlength="3">
-                    <div class="invalid-feedback"></div>
-                </div>
-
-                <div class="form-group mt-2">
-                    <label>Tam Adres</label>
-                    <textarea class="form-control" [(ngModel)]="updateModel.fullAdress" name="updateFullAddress"></textarea>
+                    <label>Roller</label>
+                    <select class="form-control" multiple required [(ngModel)]="updateModel.roleIds" name="updateRoleIds">
+                        @for(role of roles; track role){
+                            <option [value]="role.id">
+                                {{role.name}}
+                            </option>
+                        }                        
+                    </select>
                     <div class="invalid-feedback"></div>
                 </div>
             </div>

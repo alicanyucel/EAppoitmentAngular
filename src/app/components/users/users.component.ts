@@ -26,6 +26,7 @@ export class UsersComponent implements OnInit {
   updateModel: UserModel = new UserModel();
 
   search: string = "";
+roles: any;
 
   constructor(
     private http: GenericService,
