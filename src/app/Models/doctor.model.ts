@@ -1,5 +1,3 @@
-import { DepartmentModel } from "./department.model";
-
 export class DoctorModel{
     id:string="";
     firstName:string="";
@@ -7,4 +5,8 @@ export class DoctorModel{
     fullName:string="";
     department:DepartmentModel=new DepartmentModel();
     departmentValue:number=0;
+}
+export class DepartmentModel{
+    name: string = "";
+    value: number = 0;
 }
