@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormValidateDirective } from 'form-validate-angular';
 import { RouterLink } from '@angular/router';
 import { GenericService } from '../../Services/generic.service';
-import { PatientModel } from '../../Models/patient.model';
 import { SwalService } from '../../Services/swal.service';
 import { UserPipe } from '../../pipe/user.pipe';
 import { UserModel } from '../../Models/user.model';
