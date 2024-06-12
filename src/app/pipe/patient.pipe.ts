@@ -15,6 +15,7 @@ export class PatientPipe implements PipeTransform {
       p.fullName.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
       p.city.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
       p.town.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
+      p.fullAdress.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
       p.identityNumber.toString().includes(search)
     )
   }
