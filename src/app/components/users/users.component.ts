@@ -8,6 +8,7 @@ import { PatientModel } from '../../Models/patient.model';
 import { SwalService } from '../../Services/swal.service';
 import { UserPipe } from '../../pipe/user.pipe';
 import { UserModel } from '../../Models/user.model';
+import { RoleModel } from '../../Models/role.model';
 
 @Component({
   selector: 'app-patient',
@@ -16,8 +17,9 @@ import { UserModel } from '../../Models/user.model';
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent {
   users: UserModel[] = [];  
+  roles: RoleModel[] = [];
 
   @ViewChild("addModalCloseBtn") addModalCloseBtn: ElementRef<HTMLButtonElement> | undefined;
   @ViewChild("updateModalCloseBtn") updateModalCloseBtn: ElementRef<HTMLButtonElement> | undefined;
@@ -26,7 +28,6 @@ export class UsersComponent implements OnInit {
   updateModel: UserModel = new UserModel();
 
   search: string = "";
-roles: any;
 
   constructor(
     private http: GenericService,
@@ -35,11 +36,18 @@ roles: any;
 
   ngOnInit(): void {
     this.getAll();
+    this.getAllRoles();
   }
 
   getAll(){
     this.http.post<UserModel[]>("Users/GetAll", {}, (res)=> {
       this.users = res.data;
+    });
+  }
+
+  getAllRoles(){
+    this.http.post<RoleModel[]>("Users/GetAllRoles",{}, res=> {
+      this.roles = res.data;
     });
   }
   
@@ -55,7 +63,7 @@ roles: any;
   }
 
   delete(id: string, fullName: string){
-    this.swal.calSwal("Delete users?",`You want to delete ${fullName}?`,()=> {
+    this.swal.calSwal("Delete user?",`You want to delete ${fullName}?`,()=> {
       this.http.post<string>("Users/DeleteById", {id: id}, (res)=> {
         this.swal.callToast(res.data,"info");
         this.getAll();
@@ -64,7 +72,9 @@ roles: any;
   }
 
   get(data: UserModel){    
-    this.updateModel = {...data};    
+    this.updateModel = {...data};
+    console.log(this.updateModel);
+        
   }
 
   update(form:NgForm){
