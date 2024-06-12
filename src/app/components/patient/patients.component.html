@@ -44,7 +44,7 @@
                         <td>{{patient.fullName}}</td>
                         <td>{{patient.identityNumber}}</td>
                         <td>{{patient.city}} / {{patient.town}}</td>
-                        <td>{{patient.fullAddress}}</td>
+                        <td>{{patient.fullAdress}}</td>
                         <td>
                             <button (click)="get(patient)" data-bs-toggle="modal" data-bs-target="#updateModal" class="btn btn-sm btn-outline-primary me-1" title="Güncelle">
                                 <i class="fa-solid fa-edit"></i>
@@ -102,7 +102,7 @@
 
                 <div class="form-group mt-2">
                     <label>Tam Adres</label>
-                    <textarea class="form-control" [(ngModel)]="createModel.fullAddress" name="FullAddress"></textarea>
+                    <textarea class="form-control" [(ngModel)]="createModel.fullAdress" name="FullAddress"></textarea>
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
@@ -156,7 +156,7 @@
 
                 <div class="form-group mt-2">
                     <label>Tam Adres</label>
-                    <textarea class="form-control" [(ngModel)]="updateModel.fullAddress" name="updateFullAddress"></textarea>
+                    <textarea class="form-control" [(ngModel)]="updateModel.fullAdress" name="updateFullAddress"></textarea>
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
